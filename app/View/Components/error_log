@@ -1,0 +1,20 @@
+[31-Aug-2025 07:51:10 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\View\Component" not found in /home/a2cprize/public_html/app/View/Components/AppLayout.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/View/Components/AppLayout.php on line 8
+[05-Sep-2025 07:53:16 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\View\Component" not found in /home/a2cprize/public_html/app/View/Components/GuestLayout.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/View/Components/GuestLayout.php on line 8
+[05-Sep-2025 07:53:33 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\View\Component" not found in /home/a2cprize/public_html/app/View/Components/AppLayout.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/View/Components/AppLayout.php on line 8
+[05-Sep-2025 09:27:46 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\View\Component" not found in /home/a2cprize/public_html/app/View/Components/GuestLayout.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/View/Components/GuestLayout.php on line 8
+[10-Sep-2025 13:04:28 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\View\Component" not found in /home/a2cprize/public_html/app/View/Components/GuestLayout.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/View/Components/GuestLayout.php on line 8

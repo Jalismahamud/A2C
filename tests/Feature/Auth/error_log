@@ -1,0 +1,48 @@
+[05-Sep-2025 12:48:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/RegistrationTest.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/RegistrationTest.php on line 3
+[05-Sep-2025 12:48:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/AuthenticationTest.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/AuthenticationTest.php on line 5
+[05-Sep-2025 13:43:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/AuthenticationTest.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/AuthenticationTest.php on line 5
+[05-Sep-2025 14:24:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/RegistrationTest.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/RegistrationTest.php on line 3
+[06-Sep-2025 05:13:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/PasswordResetTest.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/PasswordResetTest.php on line 7
+[06-Sep-2025 06:18:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/PasswordResetTest.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/PasswordResetTest.php on line 7
+[06-Sep-2025 11:11:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/PasswordConfirmationTest.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/PasswordConfirmationTest.php on line 5
+[06-Sep-2025 14:18:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/PasswordConfirmationTest.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/PasswordConfirmationTest.php on line 5
+[06-Sep-2025 17:22:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/PasswordConfirmationTest.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/PasswordConfirmationTest.php on line 5
+[10-Sep-2025 17:07:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/RegistrationTest.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/RegistrationTest.php on line 3
+[11-Sep-2025 04:53:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/EmailVerificationTest.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/EmailVerificationTest.php on line 8
+[11-Sep-2025 13:15:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function test() in /home/a2cprize/public_html/tests/Feature/Auth/PasswordResetTest.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/tests/Feature/Auth/PasswordResetTest.php on line 7

@@ -1,0 +1,8 @@
+[16-Sep-2025 10:50:50 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Http\FormRequest" not found in /home/a2cprize/public_html/app/Http/Requests/Auth/LoginRequest.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/Http/Requests/Auth/LoginRequest.php on line 12
+[16-Sep-2025 12:27:12 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Http\FormRequest" not found in /home/a2cprize/public_html/app/Http/Requests/Auth/LoginRequest.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/Http/Requests/Auth/LoginRequest.php on line 12

@@ -1,0 +1,24 @@
+[31-Aug-2025 07:14:24 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\ServiceProvider" not found in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php on line 10
+[31-Aug-2025 07:52:15 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\ServiceProvider" not found in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php on line 10
+[31-Aug-2025 09:21:39 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\ServiceProvider" not found in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php on line 10
+[31-Aug-2025 10:40:40 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\ServiceProvider" not found in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php on line 10
+[15-Sep-2025 07:59:40 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\ServiceProvider" not found in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php on line 10
+[15-Sep-2025 08:08:03 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\ServiceProvider" not found in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/a2cprize/public_html/app/Providers/AppServiceProvider.php on line 10
