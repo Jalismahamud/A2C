@@ -53,7 +53,7 @@
 <body>
 <div class="wrapper">
     <!-- Sidebar -->
-@include('backend.agent.layouts.sidebar')
+@include('backend.incharge.layouts.sidebar')
 <!-- End Sidebar -->
 
     <div class="main-panel">
@@ -80,7 +80,7 @@
                 <!-- End Logo Header -->
             </div>
             <!-- Navbar Header -->
-        @include('backend.agent.layouts.navbar')
+        @include('backend.incharge.layouts.navbar')
 
         <!-- End Navbar -->
         </div>
@@ -146,9 +146,9 @@
 @stack('scripts')
 
   <!-- Toastr Message! -->
-@include('backend.agent.layouts.partial.toastrmsg')
+@include('backend.incharge.layouts.partial.toastrmsg')
   <!-- DataTable! -->
-@include('backend.agent.layouts.partial.datatable')
+@include('backend.incharge.layouts.partial.datatable')
 
 <script>
     $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {

@@ -110,7 +110,8 @@
             const checkUrl = @json(route('check.role'));
 
             const adminLoginRoute = @json(route('admin.login'));
-            const agentLoginRoute = @json(route('agent-or-incharge.login'));
+            // const inchargeLoginRoute = @json(route('incharge.login'));
+            const agentLoginRoute = @json(route('agent.login'));
 
             fetch(checkUrl + '?phone=' + encodeURIComponent(phone))
                 .then(response => {

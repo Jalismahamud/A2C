@@ -25,7 +25,7 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/admin/login', [AuthenticatedSessionController::class, 'store'])->name('admin.login');
 
-    Route::get('agent-or-incharge/login', [AuthenticatedSessionController::class, 'agentInchargeCreate']);
+    Route::get('incharge/login', [AuthenticatedSessionController::class, 'agentInchargeCreate']);
 
     Route::post('agent-or-incharge/login', [AuthenticatedSessionController::class, 'agentInchargeStore'])->name('agent-or-incharge.login');
 

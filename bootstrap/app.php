@@ -16,6 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
         'ability' => \App\Http\Middleware\CheckForAnyAbilityMiddleware::class,
         'auth.customer' => \App\Http\Middleware\Authenticate::class,
         'customer.auth' => \App\Http\Middleware\CustomerAuth::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'incharge' => \App\Http\Middleware\InchargeMiddleware::class
     ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

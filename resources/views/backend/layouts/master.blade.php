@@ -99,7 +99,7 @@
                     </ul>
                 </nav>
                 <div class="copyright">
-                    2024, made with <i class="fa fa-heart heart text-danger"></i> by
+                    © {{ date('Y') }}, made with <i class="fa fa-heart heart text-danger"></i> by
                     <a href="#">ClassicIT</a>
                 </div>
                 <div>

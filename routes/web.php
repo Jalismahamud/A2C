@@ -1,20 +1,23 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\backend\UserController;
-use App\Http\Controllers\backend\DashboardController;
-use App\Http\Controllers\backend\CustomerController;
-use App\Http\Controllers\backend\BannerController;
-use App\Http\Controllers\backend\VideoUrlController;
-use App\Http\Controllers\backend\MissionVisionController;
-use App\Http\Controllers\backend\AboutUsController;
-use App\Http\Controllers\backend\AgentWalletController;
-use App\Http\Controllers\backend\TermsCondtionController;
-use App\Http\Controllers\backend\NewsFeedPostController;
-use App\Http\Controllers\SettingController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\backend\BannerController;
+use App\Http\Controllers\backend\AboutUsController;
+use App\Http\Controllers\backend\CustomerController;
+use App\Http\Controllers\backend\VideoUrlController;
+use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\InchargeDashboardController;
+use App\Http\Controllers\backend\AgentWalletController;
+use App\Http\Controllers\backend\NewsFeedPostController;
+use App\Http\Controllers\backend\AdminCustomerController;
+use App\Http\Controllers\backend\MissionVisionController;
+use App\Http\Controllers\backend\TermsCondtionController;
+
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -32,9 +35,22 @@ Route::get('/check-role', function (Request $request) {
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('agent-or-incharge/dashboard', [DashboardController::class, 'indexAgent'])->middleware(['auth', 'verified'])->name('agent-or-incharge.dashboard');
 
-Route::middleware('auth')->group(function () {
+
+
+
+
+
+Route::middleware('auth', 'Incharge')->group(function () {
+    Route::get('incharge/dashboard', [InchargeDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('incharge.dashboard');
+
+    Route::resource('customers', CustomerController::class);
+    Route::get('/agent-lists', [CustomerController::class, 'agentList'])->name('customers.agent-index');
+    Route::get('/ajax/agent/customers', [InchargeDashboardController::class, 'customersJson'])->name('agent.customers-json');
+});
+
+
+Route::middleware('auth', 'admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -54,9 +70,8 @@ Route::middleware('auth')->group(function () {
 
 
 
-    //Customer
-    Route::resource('customers', CustomerController::class);
-    Route::get('/agent-lists', [CustomerController::class, 'agentList'])->name('customers.agent-index');
+    Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
+    Route::get('/ajax/customers', [AdminCustomerController::class, 'customersJson'])->name('dashboard.customers-json');
 
 
     //Banner
@@ -99,6 +114,9 @@ Route::middleware('auth')->group(function () {
     Route::get('settings', [SettingController::class, 'index'])->name('setting.index');
     Route::get('setting/edit', [SettingController::class, 'edit'])->name('setting.edit');
     Route::post('settings', [SettingController::class, 'update'])->name('setting.update');
+
+    // AJAX: agents / incharge list for dashboard
+    Route::get('/ajax/agents', [DashboardController::class, 'agentsJson'])->name('dashboard.agents-json');
 });
 
 require __DIR__ . '/auth.php';

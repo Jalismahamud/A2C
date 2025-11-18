@@ -74,7 +74,6 @@ class UserController extends Controller
     public function customerEdit($id)
     {
         $customer = Customer::find($id);
-        dd($customer);
         return view('backend.user.customer-edit', compact('customer'));
     }
 
