@@ -5,21 +5,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\AgentProfileController;
+
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\BannerController;
 use App\Http\Controllers\backend\AboutUsController;
-use App\Http\Controllers\InchargeProfileController;
 use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\VideoUrlController;
 use App\Http\Controllers\backend\DashboardController;
-use App\Http\Controllers\InchargeDashboardController;
 use App\Http\Controllers\backend\AgentWalletController;
 use App\Http\Controllers\backend\NewsFeedPostController;
 use App\Http\Controllers\backend\AdminCustomerController;
 use App\Http\Controllers\backend\MissionVisionController;
 use App\Http\Controllers\backend\TermsCondtionController;
-use App\Http\Controllers\backend\AgentDashboardController;
+use App\Http\Controllers\backend\agent\AgentProfileController;
+use App\Http\Controllers\backend\agent\AgentCustomerController;
+use App\Http\Controllers\backend\agent\AgentDashboardController;
+
+use App\Http\Controllers\backend\incharge\InchargeAgentController;
+use App\Http\Controllers\backend\incharge\InchargeProfileController;
+use App\Http\Controllers\backend\incharge\InchargeCustomerController;
+use App\Http\Controllers\backend\incharge\InchargeDashboardController;
+
 
 
 // Route::get('/', function () {
@@ -38,35 +44,55 @@ Route::get('/check-role', function (Request $request) {
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
+// Route::resource('customers', CustomerController::class);
 
 
 Route::get('incharge/dashboard', [InchargeDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('incharge.dashboard');
 Route::middleware(['auth', 'incharge'])->group(function () {
 
+    Route::get('/incharge/customers', [InchargeCustomerController::class, 'index'])->name('incharge.customers.index');
+    Route::get('/incharge/customers/create', [InchargeCustomerController::class, 'create'])->name('incharge.customers.create');
+    Route::post('/incharge/customers/store', [InchargeCustomerController::class, 'store'])->name('incharge.customers.store');
+    Route::get('/incharge/customers/{id}/edit',[InchargeCustomerController::class, 'edit'])->name('incharge.customers.edit');
+    Route::post('/incharge/customers/{id}/update', [InchargeCustomerController::class, 'update'])->name('incharge.customers.update');
+    Route::delete('/incharge/customers/{id}/delete', [InchargeCustomerController::class, 'destroy'])->name('incharge.customers.destroy');
 
-    Route::resource('customers', CustomerController::class);
-    Route::get('/agent-lists', [CustomerController::class, 'agentList'])->name('customers.agent-index');
-    Route::get('/ajax/agent/customers', [InchargeDashboardController::class, 'customersJson'])->name('agent.customers-json');
+    Route::get('/incharge/agents', [InchargeAgentController::class, 'index'])->name('incharge.agents.index');
+    Route::get('/incharge/agents/create', [InchargeAgentController::class, 'create'])->name('incharge.agents.create');
+    Route::post('/incharge/agents/store', [InchargeAgentController::class, 'store'])->name('incharge.agents.store');
+    Route::get('/incharge/agents/{id}/edit',[InchargeAgentController::class, 'edit'])->name('incharge.agents.edit');
+    Route::post('/incharge/agents/{id}/update', [InchargeAgentController::class, 'update'])->name('incharge.agents.update');
+    Route::delete('/incharge/agents/{id}/delete', [InchargeAgentController::class, 'destroy'])->name('incharge.agents.destroy');
+
+    Route::get('/agent-lists', [CustomerController::class, 'agentList'])->name('incharge.customers.agent-index');
+    Route::get('/ajax/incharge/customers', [InchargeDashboardController::class, 'customersJson'])->name('incharge.customers-json');
+    Route::get('/ajax/incharge/agents', [InchargeDashboardController::class, 'agentsJson'])->name('incharge.agents-json');
 
     Route::get('incharge/profile', [InchargeProfileController::class, 'edit'])->name('incharge.profile.edit');
     Route::post('incharge/profile', [InchargeProfileController::class, 'update'])->name('incharge.profile.update');
     Route::delete('incharge/profile', [InchargeProfileController::class, 'destroy'])->name('incharge.profile.destroy');
-    Route::post('incharge/user-update-password', [InchargeProfileController::class, 'updatePassword'])->name('incharge.user.update-password');
+    Route::post('incharge/update-password', [InchargeProfileController::class, 'updatePassword'])->name('incharge.update-password');
 });
 
 
 
 Route::get('agent/dashboard', [AgentDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('agent.dashboard');
 Route::middleware(['auth', 'agent'])->group(function () {
-    Route::resource('customers', CustomerController::class);
+
     Route::get('/ajax/agent/customers', [AgentDashboardController::class, 'customersJson'])->name('agent.customers-json');
+
+    Route::get('/agent/customers', [AgentCustomerController::class, 'index'])->name('agent.customers.index');
+    Route::get('/agent/customers/create', [AgentCustomerController::class, 'create'])->name('agent.customers.create');
+    Route::post('/agent/customers/store', [AgentCustomerController::class, 'store'])->name('agent.customers.store');
+    Route::get('/agent/customers/{id}/edit',[AgentCustomerController::class, 'edit'])->name('agent.customers.edit');
+    Route::put('/agent/customers/{id}/update', [AgentCustomerController::class, 'update'])->name('agent.customers.update');
+    Route::delete('/agent/customers/{id}/delete', [AgentCustomerController::class, 'destroy'])->name('agent.customers.destroy');
 
 
     Route::get('agent/profile', [AgentProfileController::class, 'edit'])->name('agent.profile.edit');
     Route::post('agent/profile', [AgentProfileController::class, 'update'])->name('agent.profile.update');
     Route::delete('agent/profile', [AgentProfileController::class, 'destroy'])->name('agent.profile.destroy');
-    Route::post('agent/user-update-password', [AgentProfileController::class, 'updatePassword'])->name('agent.user.update-password');
+    Route::post('agent/update-password', [AgentProfileController::class, 'updatePassword'])->name('agent.update-password');
 
 });
 

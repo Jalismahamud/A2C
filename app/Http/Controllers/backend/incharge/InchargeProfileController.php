@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\backend\incharge;
 
-use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
-use App\Traits\ImageUploader;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Traits\ImageUploader;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 
-class AgentProfileController extends Controller
+
+class InchargeProfileController extends Controller
 {
     /**
      * Display the user's profile form.
@@ -20,7 +21,8 @@ class AgentProfileController extends Controller
     use ImageUploader;
     public function edit(Request $request): View
     {
-        return view('backend.agent.profile.index', [
+
+        return view('backend.incharge.profile.index', [
             'user' => User::find(Auth::user()->id),
         ]);
     }

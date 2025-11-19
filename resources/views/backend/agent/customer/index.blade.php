@@ -1,13 +1,15 @@
 @extends('backend.agent.layouts.master')
-@section('title', 'Agent Dashboard')
+@section('title', 'Agent List')
 @section('content')
     <style>
+
         @media only screen and (max-width: 600px) {
+
+
             .client {
                 flex-direction: column
             }
         }
-
         table.display.table.table-striped.table-hover thead tr th {
             background: #E2EFDA;
             padding: 10px !important;
@@ -15,49 +17,30 @@
             border-bottom: 2px solid #000 !important;
         }
     </style>
-
     <div class="container">
         <div class="page-inner">
-
-            {{-- Dashboard Header --}}
-            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                <div>
-                    <h3 class="fw-bold mb-3">Dashboard</h3>
-                    <h6 class="op-7 mb-2">Free Bootstrap 5 Agent Dashboard</h6>
-                </div>
-                <div class="ms-md-auto py-2 py-md-0">
-                    <a href="{{ route('agent.customers.index') }}" class="btn btn-label-info btn-round me-2">Manage</a>
-                    <a href="{{ route('agent.customers.create') }}" class="btn btn-primary btn-round">Add Customer</a>
-                </div>
+            <div class="page-header">
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home">
+                        <a href="#">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Tables</a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Customers</a>
+                    </li>
+                </ul>
             </div>
 
-            {{-- Dashboard Stats --}}
-            <div class="row mb-4">
-                <div class="col-sm-6 col-md-3">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-icon">
-                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0">
-                                    <div class="numbers">
-                                        <p class="card-category">Customers</p>
-                                        <h4 class="card-title">
-                                            {{ $totalCustomer }} /
-                                            <span style="font-size: 0.8rem; color: #007bff;">
-                                                {{ $todaysCustomer }} Today's Customer
-                                            </span>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {{-- Customer Table Section --}}
             <div class="row">

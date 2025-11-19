@@ -1,5 +1,5 @@
-@extends('backend.agent.layouts.master')
-@section('title', 'Agent Dashboard')
+@extends('backend.incharge.layouts.master')
+@section('title', 'Incharge Customers')
 @section('content')
     <style>
         @media only screen and (max-width: 600px) {
@@ -22,12 +22,11 @@
             {{-- Dashboard Header --}}
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
-                    <h3 class="fw-bold mb-3">Dashboard</h3>
-                    <h6 class="op-7 mb-2">Free Bootstrap 5 Agent Dashboard</h6>
+                    <h3 class="fw-bold mb-3">Customers</h3>
+                    <h6 class="op-7 mb-2">Manage your customers</h6>
                 </div>
                 <div class="ms-md-auto py-2 py-md-0">
-                    <a href="{{ route('agent.customers.index') }}" class="btn btn-label-info btn-round me-2">Manage</a>
-                    <a href="{{ route('agent.customers.create') }}" class="btn btn-primary btn-round">Add Customer</a>
+                    <a href="{{ route('incharge.customers.create') }}" class="btn btn-primary btn-round">Add Customer</a>
                 </div>
             </div>
 
@@ -75,10 +74,6 @@
                                         <option value="500">500</option>
                                         <option value="all">All</option>
                                     </select>
-                                </div>
-                                <div class="input-group input-group-sm" style="width:360px;">
-                                    <input type="text" id="search_items" class="form-control" placeholder="Search id, name, phone, nid, school...">
-                                    <button type="button" id="search-clear" class="btn btn-outline-secondary" title="Clear search"><i class="fas fa-times"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -129,31 +124,20 @@
     <script type="text/javascript">
         (function(){
             const tbody = document.getElementById('customers-table-body');
-            const searchInput = document.getElementById('search_items');
-            const clearBtn = document.getElementById('search-clear');
             const perPageSelect = document.getElementById('per-page-select');
             const paginationContainer = document.getElementById('pagination-container');
             const paginationInfo = document.getElementById('pagination-info');
             if (!tbody) return;
 
             let currentPage = 1;
-            let debounceTimer = null;
-            const debounce = (fn, delay=300) => {
-                return function(...args){
-                    clearTimeout(debounceTimer);
-                    debounceTimer = setTimeout(()=> fn.apply(this,args), delay);
-                };
-            };
 
             function fetchCustomers(page = 1) {
                 currentPage = page;
-                const search = searchInput ? searchInput.value.trim() : '';
                 const perPage = perPageSelect ? perPageSelect.value : '25';
                 const params = new URLSearchParams();
-                if (search) params.set('search', search);
                 if (perPage !== 'all') params.set('per_page', perPage);
                 params.set('page', page);
-                const url = '{{ route('agent.customers-json') }}' + (params.toString() ? ('?' + params.toString()) : '');
+                const url = '{{ route('incharge.customers-json') }}' + (params.toString() ? ('?' + params.toString()) : '');
 
                 fetch(url, { headers: { 'Accept': 'application/json' } })
                     .then(res => { if (!res.ok) throw res; return res.json(); })
@@ -176,14 +160,14 @@
                             const statusText = (c.status == 1) ? 'Active' : 'Inactive';
                             const approvedText = (c.approved == 1) ? 'Approved' : 'Not Approved';
                             const rowNumber = ((pagination.current_page - 1) * pagination.per_page) + idx + 1;
-                            const editUrl = `{{ url('customers') }}/${c.id}/edit`;
+                            const editUrl = `{{ url('incharge/customers') }}/${c.id}/edit`;
                             tr.innerHTML = `
                                 <td class="text-end">${rowNumber}</td>
                                 <td class="text-end">${imgHtml}</td>
                                 <td class="text-start">${escapeHtml(c.name)}</td>
                                 <td class="text-start">${escapeHtml(c.type || '')}</td>
                                 <td class="text-start">${escapeHtml(c.phone)}</td>
-                                <td class="text-center">${c.address || ''}</td>
+                                <td class="text-center">${escapeHtml(c.address || '')}</td>
                                 <td class="text-start">${escapeHtml(c.nid_number || '')}</td>
                                 <td class="text-start">${escapeHtml(c.school_name || '')}</td>
                                 <td class="text-start">${escapeHtml(c.teacher_name || '')}</td>
@@ -236,10 +220,6 @@
 
             window.fetchCustomers = fetchCustomers;
 
-            const debouncedFetch = debounce(() => { currentPage = 1; fetchCustomers(1); }, 350);
-
-            if (searchInput) searchInput.addEventListener('input', debouncedFetch);
-            if (clearBtn) clearBtn.addEventListener('click', function(){ searchInput.value = ''; currentPage = 1; fetchCustomers(1); });
             if (perPageSelect) perPageSelect.addEventListener('change', function(){ currentPage = 1; fetchCustomers(1); });
 
             // Initial load
@@ -285,7 +265,7 @@
             NProgress.start();
 
             $.ajax({
-                url: "{{ route('agent.customers.destroy', ':id') }}".replace(':id', id),
+                url: "{{ route('incharge.customers.destroy', ':id') }}".replace(':id', id),
                 type: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'

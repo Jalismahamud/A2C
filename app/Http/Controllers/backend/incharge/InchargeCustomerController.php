@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\backend\incharge;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use App\Traits\ImageUploader;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -13,22 +13,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class CustomerController extends Controller
+class InchargeCustomerController extends Controller
 {
-    use ImageUploader;
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $customers = Customer::latest()->get();
-        return view('backend.agent.customer.list', compact('customers'));
+        $totalCustomer = Customer::where('status', 1)->where('created_by', Auth::user()->id)->count();
+        $todaysCustomer = Customer::where('status', 1)->where('created_by', Auth::user()->id)->whereDate('created_at', Carbon::today())->count();
+
+        return view('backend.incharge.customer.index', compact('totalCustomer', 'todaysCustomer'));
     }
 
     public function agentList()
     {
         $users = User::latest()->where('role', 1)->where('approved', 0)->where('created_by', Auth::user()->id)->get();
-        return view('backend.agent.customer.agent-list', compact('users'));
+        return view('backend.incharge.customer.agent-list', compact('users'));
     }
 
     /**
@@ -36,88 +34,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('backend.agent.customer.create');
+        return view('backend.incharge.customer.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {
-
-    //     $request->validate([
-    //         'name' => 'required|string|max:100',
-    //         'address' => 'required|max:255',
-    //         'type' => 'required',
-    //         'phone' => [
-    //             'required',
-    //             Rule::unique('users', 'phone'),
-    //             Rule::unique('customers', 'phone'),
-    //         ],
-    //         'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    //     ], [
-    //         'phone.unique' => 'This phone number is already in use. Please use a different one.',
-    //     ]);
-    //     if ($request->type == 'agent') {
-    //         $user = new User();
-    //         $user->name = $request->name;
-    //         $user->phone = $request->phone;
-    //         $user->address = $request->address;
-    //         $user->nid_number = $request->nid_number;
-    //         $user->role = 2;
-    //         $user->balance = 1500;
-    //         $user->password = Hash::make('12345678');
-    //         $user->created_by = Auth::user()->id;
-    //         $user->approved = 0;
-    //         $user->status = 1;
-
-
-    //         if ($request->hasFile('image')) {
-    //             $imageFile = $request->file('image');
-    //             $width = 400;
-    //             $height = 400;
-    //             $folder = 'backend/images/user/';
-    //             $user->image = $this->uploadImage($imageFile, $width, $height, $folder, 75);
-    //         }
-
-    //         $user->save();
-    //         return redirect()->route('customers.agent-index')->with('success', 'Agent Data Created successfully.');
-    //     }
-
-    //     $customer = new Customer();
-    //     $customer->name = $request->name;
-    //     $customer->phone = $request->phone;
-    //     $customer->address = $request->address;
-    //     $customer->type = $request->type;
-    //     if ($request->type == 'general' || $request->type == 'driver') {
-    //         $customer->nid_number = $request->nid_number;
-    //     }
-    //     if ($request->type == 'driver') {
-    //         $customer->vehicle_type = $request->vehicle_type;
-    //         $customer->license_number = $request->license_number;
-    //     }
-    //     if ($request->type == 'student') {
-    //         $customer->school_name = $request->school_name;
-    //         $customer->student_class = $request->student_class;
-    //     }
-    //     $customer->password = Hash::make('12345678');
-    //     $customer->created_by = Auth::user()->id;
-    //     $customer->approved = 0;
-    //     $customer->status = 1;
-    //     $customer->agent_phone = $request->agent_phone;
-
-    //     if ($request->hasFile('image')) {
-    //         $imageFile = $request->file('image');
-    //         $width = 400;
-    //         $height = 400;
-    //         $folder = 'backend/images/customer/';
-    //         $customer->image = $this->uploadImage($imageFile, $width, $height, $folder, 75);
-    //     }
-
-    //     $customer->save();
-    //     // return redirect()->route('customers.index')->with('success', 'Customer Data Created successfully.');
-    //      return redirect()->route('agent-or-incharge.dashboard')->with('success', 'Customer Data Created successfully.');
-    // }
 
     public function store(Request $request)
     {
@@ -172,7 +90,7 @@ class CustomerController extends Controller
                 DB::commit();
 
                 return redirect()
-                    ->route('customers.agent-index')
+                    ->route('incharge.customers.agent-index')
                     ->with('success', 'Agent created successfully.');
             }
 
@@ -201,7 +119,7 @@ class CustomerController extends Controller
             $customer->created_by = Auth::id();
             $customer->approved = 0;
             $customer->status = 1;
-            $customer->phone = $request->agent_phone;
+            $customer->phone = $request->phone;
 
             if ($request->hasFile('image')) {
                 $imageFile = $request->file('image');
@@ -221,19 +139,9 @@ class CustomerController extends Controller
 
             DB::commit();
 
-            if (Auth::user()->role == 1) {
-                return redirect()
-                    ->route('dashboard')
+            return redirect()
+                    ->route('incharge.customers.index')
                     ->with('success', 'Customer created successfully.');
-            } else if (Auth::user()->role == 2) {
-                return redirect()
-                    ->route('incharge.dashboard')
-                    ->with('success', 'Customer created successfully.');
-            } else {
-                return redirect()
-                    ->route('agent.dashboard')
-                    ->with('success', 'Customer created successfully.');
-            }
         } catch (\Throwable $e) {
 
             DB::rollBack();
@@ -255,13 +163,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($id);
 
-        if (Auth::user()->role == 1) {
-            return view('customer.edit', compact('customer'));
-        } else if (Auth::user()->role == 2) {
-            return view('backend.incharge.customer.edit', compact('customer'));
-        } else {
-            return view('backend.agent.customer.edit', compact('customer'));
-        }
+          return view('backend.incharge.customer.edit', compact('customer'));
     }
 
     /**
@@ -295,7 +197,7 @@ class CustomerController extends Controller
                 $user->nid_number = $request->nid_number;
                 $user->approved = $request->approved ?? $user->approved;
                 $user->status = $request->status ?? $user->status;
-                $user->updated_by = Auth::id();
+                // $user->updated_by = Auth::id();
 
 
 
@@ -322,8 +224,8 @@ class CustomerController extends Controller
 
                 DB::commit();
                 return redirect()
-                    ->route('customers.agent-index')
-                    ->with('success', 'Agent updated successfully.');
+                    ->route('incharge.customers.agent-index')
+                    ->with('success', 'Agent updated successfully');
             }
 
             // --- Otherwise, update a Customer ---
@@ -333,7 +235,7 @@ class CustomerController extends Controller
             $customer->type = $request->type;
             $customer->approved = $request->approved ?? $customer->approved;
             $customer->status = $request->status ?? $customer->status;
-            $customer->updated_by = Auth::id();
+            // $customer->updated_by = Auth::id();
 
             // Only update phone if necessary
             $customer->phone = $request->phone;
@@ -383,13 +285,9 @@ class CustomerController extends Controller
 
             DB::commit();
 
-            if (Auth::user()->role == 1) {
-                return view('customer.edit', compact('customer'));
-            } else if (Auth::user()->role == 2) {
-                return view('backend.incharge.customer.edit', compact('customer'));
-            } else {
-                return view('backend.agent.customer.edit', compact('customer'));
-            }
+            return redirect()
+                    ->route('incharge.customers.index')
+                    ->with('success', 'Customer updated successfully.');
         } catch (\Throwable $e) {
 
             DB::rollBack();
@@ -415,7 +313,7 @@ class CustomerController extends Controller
 
             return response()->json(['message' => 'Customer deleted successfully.']);
         } catch (\Throwable $e) {
-
+            Log::error('Customer Delete Error: ' . $e->getMessage());
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
     }

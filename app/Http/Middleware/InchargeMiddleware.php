@@ -17,7 +17,7 @@ class InchargeMiddleware
         }
 
         $user = Auth::user();
-       
+
         if (Auth::user()->role !== 2) {
             abort(403, 'Unauthorized access.');
         }

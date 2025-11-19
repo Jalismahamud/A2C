@@ -46,17 +46,12 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="{{ route('customers.create') }}">
+                                <a href="{{ route('agent.customers.create') }}">
                                     <span class="sub-item">Create</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('customers.agent-index') }}">
-                                    <span class="sub-item">Agent List</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('customers.index') }}">
+                                <a href="{{ route('agent.customers.index') }}">
                                     <span class="sub-item">Customer List</span>
                                 </a>
                             </li>

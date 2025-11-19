@@ -1,4 +1,4 @@
-@extends('backend.agent.layouts.master')
+@extends('backend.incharge.layouts.master')
 @section('title', 'Customer Edit')
 @section('content')
     <style>
@@ -35,14 +35,13 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="card-title">Edit Customer</div>
                                 <div class="py-0 ms-md-auto py-md-0">
-                                    <a href="{{ route('agent.customers.index') }}" class="btn btn-primary btn-sm">Back</a>
+                                    <a href="{{ route('incharge.dashboard') }}" class="btn btn-primary btn-sm">Back</a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('agent.customers.update', $customer->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('incharge.customers.update', $customer->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
                                 <div class="row g-2">
                                     <!-- Name -->
                                     <div class="col-12 col-md-6 col-lg-4">
@@ -172,14 +171,16 @@
         $(document).ready(function() {
             function toggleFields() {
                 var selectedType = $('#type').val();
-                $('#nid_field, #student_fields, #teacher_fields, #driver_fields, #license_fields').hide();
+                $('#nid_field, #student_fields, #student_fields1, #driver_fields, #driver_fields1').hide();
 
                 if (selectedType === 'general') {
                     $('#nid_field').show();
+                } else if (selectedType === 'agent') {
+                    $('#nid_field').show();
                 } else if (selectedType === 'student') {
-                    $('#student_fields, #teacher_fields').show();
+                    $('#student_fields, #student_fields1').show();
                 } else if (selectedType === 'driver') {
-                    $('#nid_field, #driver_fields, #license_fields').show();
+                    $('#nid_field, #driver_fields, #driver_fields1').show();
                 }
             }
             toggleFields();

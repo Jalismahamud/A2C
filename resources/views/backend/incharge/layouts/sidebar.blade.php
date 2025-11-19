@@ -2,7 +2,7 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="{{ route('dashboard') }}" class="logo">
+            <a href="{{ route('incharge.dashboard') }}" class="logo">
                 <img src="{{ asset('backend/images/banner/' . $company_logo) }}" alt="navbar brand" class="navbar-brand"
                     height="50" />
                 <span style="margin-left:5px; color:white;">{{ $company_name }}</span>
@@ -37,6 +37,36 @@
                     </span>
                     <h4 class="text-section">Components</h4>
                 </li>
+
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#base">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Agents</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="base">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ route('incharge.agents.index') }}">
+                                    <span class="sub-item">Agent List</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                {{-- <a href="{{ route('customers.incharge-index') }}">
+                                    <span class="sub-item">Agent List</span>
+                                </a> --}}
+                            </li>
+                            <li>
+                                <a href="{{ route('incharge.agents.create') }}">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
@@ -46,8 +76,8 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="{{ route('customers.create') }}">
-                                    <span class="sub-item">Create</span>
+                                <a href="{{ route('incharge.customers.index') }}">
+                                    <span class="sub-item">Customer List</span>
                                 </a>
                             </li>
                             <li>
@@ -56,8 +86,9 @@
                                 </a> --}}
                             </li>
                             <li>
-                                <a href="{{ route('customers.index') }}">
-                                    <span class="sub-item">Customer List</span>
+
+                                <a href="{{ route('incharge.customers.create') }}">
+                                    <span class="sub-item">Create</span>
                                 </a>
                             </li>
                         </ul>

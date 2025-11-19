@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\backend\agent;
 
 use Carbon\Carbon;
 use App\Models\Customer;
@@ -32,12 +32,12 @@ class AgentDashboardController extends Controller
         }
 
         $search = $request->query('search');
-        $perPage = $request->query('per_page', 25);
+        $perPage = $request->query('per_page', 10);
         $page = $request->query('page', 1);
 
-        $validPerPage = [25, 50, 100, 500];
+        $validPerPage = [10, 25, 50, 100, 500];
         if (!in_array((int)$perPage, $validPerPage) && $perPage !== 'all') {
-            $perPage = 25;
+            $perPage = 10;
         }
 
         $query = Customer::query();

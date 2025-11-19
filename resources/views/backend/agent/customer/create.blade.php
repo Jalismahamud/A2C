@@ -35,12 +35,12 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="card-title">Add Customer</div>
                                 <div class="py-0 ms-md-auto py-md-0">
-                                    <a href="{{ route('customers.index') }}" class="btn btn-primary btn-sm">Back</a>
+                                    <a href="{{ route('agent.customers.index') }}" class="btn btn-primary btn-sm">Back</a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('agent.customers.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row g-2">
                                     <!-- Name -->
@@ -134,9 +134,7 @@
 
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <div class="form-group">
-                                            <label for="agent_phone">License Number</label>
-                                            <input type="text" name="agent_phone" class="form-control"
-                                                value="{{ old('agent_phone') }}">
+                                            <!-- leftover field removed: agent_phone is not used for agent customer creation -->
                                         </div>
                                     </div>
 
