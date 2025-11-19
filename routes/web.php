@@ -5,9 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AgentProfileController;
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\BannerController;
 use App\Http\Controllers\backend\AboutUsController;
+use App\Http\Controllers\InchargeProfileController;
 use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\VideoUrlController;
 use App\Http\Controllers\backend\DashboardController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\backend\NewsFeedPostController;
 use App\Http\Controllers\backend\AdminCustomerController;
 use App\Http\Controllers\backend\MissionVisionController;
 use App\Http\Controllers\backend\TermsCondtionController;
+use App\Http\Controllers\backend\AgentDashboardController;
 
 
 // Route::get('/', function () {
@@ -38,19 +41,37 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 
 
+Route::get('incharge/dashboard', [InchargeDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('incharge.dashboard');
+Route::middleware(['auth', 'incharge'])->group(function () {
 
-
-
-Route::middleware('auth', 'Incharge')->group(function () {
-    Route::get('incharge/dashboard', [InchargeDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('incharge.dashboard');
 
     Route::resource('customers', CustomerController::class);
     Route::get('/agent-lists', [CustomerController::class, 'agentList'])->name('customers.agent-index');
     Route::get('/ajax/agent/customers', [InchargeDashboardController::class, 'customersJson'])->name('agent.customers-json');
+
+    Route::get('incharge/profile', [InchargeProfileController::class, 'edit'])->name('incharge.profile.edit');
+    Route::post('incharge/profile', [InchargeProfileController::class, 'update'])->name('incharge.profile.update');
+    Route::delete('incharge/profile', [InchargeProfileController::class, 'destroy'])->name('incharge.profile.destroy');
+    Route::post('incharge/user-update-password', [InchargeProfileController::class, 'updatePassword'])->name('incharge.user.update-password');
 });
 
 
-Route::middleware('auth', 'admin')->group(function () {
+
+Route::get('agent/dashboard', [AgentDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('agent.dashboard');
+Route::middleware(['auth', 'agent'])->group(function () {
+    Route::resource('customers', CustomerController::class);
+    Route::get('/ajax/agent/customers', [AgentDashboardController::class, 'customersJson'])->name('agent.customers-json');
+
+
+    Route::get('agent/profile', [AgentProfileController::class, 'edit'])->name('agent.profile.edit');
+    Route::post('agent/profile', [AgentProfileController::class, 'update'])->name('agent.profile.update');
+    Route::delete('agent/profile', [AgentProfileController::class, 'destroy'])->name('agent.profile.destroy');
+    Route::post('agent/user-update-password', [AgentProfileController::class, 'updatePassword'])->name('agent.user.update-password');
+
+});
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

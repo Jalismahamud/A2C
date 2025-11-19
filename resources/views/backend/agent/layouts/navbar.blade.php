@@ -56,7 +56,7 @@
                         </li>
                         <li>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ route('profile.edit')  }}">My Profile</a>
+                            <a class="dropdown-item" href="{{ route('agent.profile.edit')  }}">My Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>

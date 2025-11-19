@@ -29,24 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $user = Auth::user();
-
-       
-        if ($user->role == 1) {
-            return redirect()->intended(route('dashboard', absolute: false));
-        }
-
-        if ($user->role == 2) {
-
-            if (route('incharge.dashboard', [], false)) {
-                return redirect()->intended(route('incharge.dashboard', absolute: false));
-            }
-            return redirect()->intended(route('agent-or-incharge.dashboard', absolute: false));
-        }
-
-        if ($user->role == 3) {
-            return redirect()->intended(route('agent-or-incharge.dashboard', absolute: false));
-        }
+        $user = User::where('role', 1)->get();
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
@@ -62,7 +45,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('agent-or-incharge.dashboard', absolute: false));
+        if(Auth::user()->role == 2){
+            return redirect()->intended(route('incharge.dashboard', absolute: false));
+        } elseif (Auth::user()->role == 3){
+            return redirect()->intended(route('agent.dashboard', absolute: false));
+        } else {
+            return redirect()->back()->withErrors(['role' => 'Unauthorized role for agent or incharge login.']);
+        }
     }
 
     /**

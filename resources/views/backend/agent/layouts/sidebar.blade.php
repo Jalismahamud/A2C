@@ -2,7 +2,7 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="{{ route('dashboard') }}" class="logo">
+            <a href="{{ route('agent.dashboard') }}" class="logo">
                 <img src="{{ asset('backend/images/banner/' . $company_logo) }}" alt="navbar brand" class="navbar-brand"
                     height="50" />
                 <span style="margin-left:5px; color:white;">{{ $company_name }}</span>
@@ -25,7 +25,7 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 <li class="nav-item active">
-                    <a data-bs-toggle="collapse" href="{{ url('agent-or-incharge/dashboard') }}" class="collapsed"
+                    <a data-bs-toggle="collapse" href="{{ url('agent/dashboard') }}" class="collapsed"
                         aria-expanded="false">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
