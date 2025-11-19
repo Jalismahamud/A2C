@@ -1,6 +1,6 @@
 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
     <div class="container-fluid">
-        <nav
+        {{-- <nav
             class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -10,7 +10,7 @@
                 </div>
                 <input type="text" placeholder="Search ..." class="form-control" data-bs-toggle="modal" data-bs-target="#testModal" />
             </div>
-        </nav>
+        </nav> --}}
 
         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
             <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">

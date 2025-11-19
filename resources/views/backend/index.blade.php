@@ -177,8 +177,9 @@
                                 <select id="role-filter" class="form-control form-control-sm">
                                     <option value="3" selected>Agent</option>
                                     <option value="2">Incharge</option>
+                                    <option value="customer">Customers</option>
                                 </select>
-                                <div class="input-group input-group-sm" style="width:300px;">
+                                <div class="input-group input-group-sm" style="width:400px;">
                                     <input type="text" id="agents-search" class="form-control"
                                         placeholder="Search name, phone, nid, address...">
                                     <button type="button" id="agents-search-clear" class="btn btn-outline-secondary"
@@ -266,7 +267,48 @@
             function updateTitleByRole(role) {
                 if (role == '2') titleEl.textContent = 'Recent Incharge';
                 else if (role == '3') titleEl.textContent = 'Recent Agents';
+                else if (role == 'customer') titleEl.textContent = 'Recent Customers';
                 else titleEl.textContent = 'Recent Users';
+            }
+
+            function updateTableHeaders(role) {
+                const thead = document.querySelector('table thead');
+                if (!thead) return;
+                if (role === 'customer') {
+                    thead.innerHTML = `
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Nid Number</th>
+                            <th>School</th>
+                            <th>Teacher</th>
+                            <th>Vehicle</th>
+                            <th>License</th>
+                            <th>Address</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Approved</th>
+                            <th>Created By</th>
+                        </tr>
+                    `;
+                } else {
+                    thead.innerHTML = `
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Nid Number</th>
+                            <th>Address</th>
+                            <th>Balance</th>
+                            <th>Status</th>
+                            <th>Approved</th>
+                            <th>Created By</th>
+                        </tr>
+                    `;
+                }
             }
 
             function fetchAgents(page = 1) {
@@ -279,8 +321,17 @@
                 if (search) params.set('search', search);
                 if (perPage !== 'all') params.set('per_page', perPage);
                 params.set('page', page);
-                const url = '{{ route('dashboard.agents-json') }}' + (params.toString() ? ('?' + params.toString()) :
-                    '');
+                // choose endpoint depending on selection
+                let url;
+                if (role === 'customer') {
+                    // customers are on a separate endpoint
+                    url = '{{ route('dashboard.customers-json') }}' + (params.toString() ? ('?' + params.toString()) : '');
+                } else {
+                    url = '{{ route('dashboard.agents-json') }}' + (params.toString() ? ('?' + params.toString()) : '');
+                }
+
+                // update headers for the current selection
+                updateTableHeaders(role);
 
                 fetch(url, {
                         headers: {
@@ -305,24 +356,43 @@
                         }
                         data.forEach((u, idx) => {
                             const tr = document.createElement('tr');
-                            const imgHtml = u.image ?
-                                `<img src="${u.image}" width="50" height="50" alt="img">` : '';
+                            const imgHtml = u.image ? `<img src="${u.image}" width="50" height="50" alt="img">` : '';
                             const statusText = (u.status == 1) ? 'Active' : 'Inactive';
                             const approvedText = (u.approved == 1) ? 'Approved' : 'Not Approved';
-                            const rowNumber = ((pagination.current_page - 1) * pagination.per_page) + idx +
-                                1;
-                            tr.innerHTML = `
-                            <td>${rowNumber}</td>
-                            <td>${imgHtml}</td>
-                            <td>${escapeHtml(u.name)}</td>
-                            <td>${escapeHtml(u.phone)}</td>
-                            <td>${escapeHtml(u.nid_number || '')}</td>
-                            <td>${escapeHtml(u.address || '')}</td>
-                            <td>${escapeHtml(u.balance ?? '')}</td>
-                            <td>${escapeHtml(statusText)}</td>
-                            <td>${escapeHtml(approvedText)}</td>
-                            <td>${escapeHtml(u.created_by || '')}</td>
-                        `;
+                            const rowNumber = ((pagination.current_page - 1) * pagination.per_page) + idx + 1;
+
+                            if (role === 'customer') {
+                                tr.innerHTML = `
+                                    <td>${rowNumber}</td>
+                                    <td>${imgHtml}</td>
+                                    <td>${escapeHtml(u.name)}</td>
+                                    <td>${escapeHtml(u.phone)}</td>
+                                    <td>${escapeHtml(u.nid_number || 'N/A')}</td>
+                                    <td>${escapeHtml(u.school_name || 'N/A')}</td>
+                                    <td>${escapeHtml(u.teacher_name || 'N/A')}</td>
+                                    <td>${escapeHtml(u.vehicle_type || 'N/A')}</td>
+                                    <td>${escapeHtml(u.license_number || 'N/A')}</td>
+                                    <td>${escapeHtml(u.address || 'N/A')}</td>
+                                    <td>${escapeHtml(u.type || 'N/A')}</td>
+                                    <td>${escapeHtml(statusText)}</td>
+                                    <td>${escapeHtml(approvedText)}</td>
+                                    <td>${escapeHtml(u.created_by || 'N/A')}</td>
+                                `;
+                            } else {
+                                tr.innerHTML = `
+                                    <td>${rowNumber}</td>
+                                    <td>${imgHtml}</td>
+                                    <td>${escapeHtml(u.name)}</td>
+                                    <td>${escapeHtml(u.phone)}</td>
+                                    <td>${escapeHtml(u.nid_number || '')}</td>
+                                    <td>${escapeHtml(u.address || '')}</td>
+                                    <td>${escapeHtml(u.balance ?? '')}</td>
+                                    <td>${escapeHtml(statusText)}</td>
+                                    <td>${escapeHtml(approvedText)}</td>
+                                    <td>${escapeHtml(u.created_by || '')}</td>
+                                `;
+                            }
+
                             tbody.appendChild(tr);
                         });
 
@@ -353,7 +423,7 @@
                     `<a class="page-link" href="#" onclick="window.fetchAgents(${pagination.current_page - 1}); return false;">Previous</a>`;
                 paginationContainer.appendChild(prevLi);
 
-               
+
                 for (let i = 1; i <= pagination.last_page; i++) {
                     const li = document.createElement('li');
                     li.className = `page-item ${i === pagination.current_page ? 'active' : ''}`;

@@ -25,8 +25,7 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 <li class="nav-item active">
-                    <a data-bs-toggle="collapse" href="{{ url('incharge/dashboard') }}" class="collapsed"
-                        aria-expanded="false">
+                    <a href="{{ route('incharge.dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
