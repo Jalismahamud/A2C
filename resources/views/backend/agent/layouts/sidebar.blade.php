@@ -51,7 +51,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('agent.customers.index') }}">
-                                    <span class="sub-item">Customer List</span>
+                                    <span class="su </span>
                                 </a>
                             </li>
                         </ul>
