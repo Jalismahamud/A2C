@@ -25,6 +25,7 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
+    // dd($request->all());
         $request->validate([
             'registration_bonus' => 'required',
             'agent_minimum_withdraw' => 'required',
@@ -32,10 +33,11 @@ class SettingController extends Controller
         ]);
 
         $setting = Setting::find(1);
-        $setting->company_name = $request->company_name;
-        $setting->company_email = $request->company_email;
-        $setting->company_phone = $request->company_phone;
-        $setting->company_address = $request->company_address;
+
+        $setting->company_name = $request->company_name ?? null;
+        $setting->company_email = $request->company_email ?? null;
+        $setting->company_phone = $request->company_phone ?? null;
+        $setting->company_address = $request->company_address ?? null;
         if ($request->hasFile('company_logo')) {
             $imageFile = $request->file('company_logo');
             $width = 400;
@@ -43,8 +45,8 @@ class SettingController extends Controller
             $folder = 'backend/images/banner/';
             $setting->company_logo = $this->uploadImage($imageFile, $width, $height, $folder, 75);
         }
-        $setting->registration_bonus = $request->registration_bonus;
-        $setting->agent_minimum_withdraw = $request->agent_minimum_withdraw;
+        $setting->registration_bonus = $request->registration_bonus ?? null;
+        $setting->agent_minimum_withdraw = $request->agent_minimum_withdraw ?? null;
 
         $setting->save();
 

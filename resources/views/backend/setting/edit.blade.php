@@ -122,11 +122,11 @@
                                             <input type="file" name="company_logo"
                                                 class="form-control @error('company_logo') is-invalid @enderror"
                                                 id="image" onchange="previewImage(event)" />
-                                            @if ($setting->company_logo)
+                                            @if ($setting?->company_logo)
                                                 <!-- Image preview -->
                                                 <div class="mt-2">
                                                     <img id="imagePreview"
-                                                        src="{{ asset('backend/images/banner/' . $setting->company_logo) }}"
+                                                        src="{{ asset('backend/images/banner/' . $setting->company_logo)}}"
                                                         alt="Customer Image" width="75">
                                                 </div>
                                             @else

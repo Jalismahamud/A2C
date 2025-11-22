@@ -23,7 +23,7 @@
                         <div class="card-body">
                             <div class="employee__history__photo ">
                                 @if ($user->image ?? '')
-                                    <img style="height: 120px;width: 120px;border-radius: 50%; margin-left: 170px"
+                                    <img style="height: 120px;width: 120px;border-radius: 50%; "
                                          src="{{ asset('backend/images/user/' . $user->image) }}" alt="no image">
                                 @else
                                     <img src="{{ url('backend/images/no-image.png') }}" alt="customer" width="50">

@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminSeeder::class);
         $this->call(VisionMissionSeeder::class);
+        $this->call(SettingSeeder::class);
     }
 }
