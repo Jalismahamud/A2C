@@ -16,11 +16,14 @@ class InchargeDashboardController extends Controller
         if (!Auth::check() || !in_array(Auth::user()->role, [2])) {
             abort(403, 'Unauthorized access.');
         }
+
+        $totalAgent = User::where('role', 3)->where('created_by', Auth::user()->id)->count();
+        $todaysAgent = User::where('role', 3)->where('created_by', Auth::user()->id)->whereDate('created_at', Carbon::today())->count();
         $totalCustomer = Customer::where('status' , 1)->where('created_by', Auth::user()->id)->count();
         $todaysCustomer = Customer::where('status', 1)->where('created_by', Auth::user()->id)->whereDate('created_at', Carbon::today())->count();
         $customers = Customer::with('addBY')->where('created_by', Auth::user()->id)->latest()->paginate(10);
 
-        return view('backend.incharge.index', compact('totalCustomer','todaysCustomer' , 'customers'));
+        return view('backend.incharge.index', compact('totalAgent', 'todaysAgent', 'totalCustomer','todaysCustomer' , 'customers'));
     }
 
     /**

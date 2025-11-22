@@ -53,7 +53,9 @@
 <body>
 <div class="wrapper">
     <!-- Sidebar -->
-@include('backend.agent.layouts.sidebar')
+    @include('backend.agent.layouts.sidebar')
+
+
 <!-- End Sidebar -->
 
     <div class="main-panel">

@@ -17,17 +17,25 @@ class DashboardController extends Controller
         if (!Auth::check() || Auth::user()->role != 1) {
             abort(403, 'Unauthorized access.');
         }
-        $agentCount = User::where('role', 3)->count();
-        $inChargeCount = User::where('role', 2)->count();
+        $agentCount = User::where('role', 3)->where('created_by' , Auth::user()->id)->count();
+        $todaysAgentCount = User::where('role' , 3)->where('created_by' , Auth::user()->id)->whereDate('created_at' , Carbon::today())->count();
+        $inChargeCount = User::where('role', 2)->where('created_by' , Auth::user()->id)->count();
+        $todaysInChargeCount = User::where('role' , 2)->where('created_by' , Auth::user()->id)->whereDate('created_at' , Carbon::today())->count();
         $customerActiveCount = Customer::where('status', 1)->where('approved', 1)->where('created_by', Auth::user()->id)->count();
-        $customerInactiveCount = Customer::where('status', 1)->where('approved', 1)->where('created_by', Auth::user()->id)->count();
-        $customerRequestCount = Customer::where('status', 1)->count();
+        $todaysCustomerActiveCount = Customer::where('status', 1)->where('approved', 1)->where('created_by', Auth::user()->id)->whereDate('created_at', Carbon::today())->count();
+        $customerInactiveCount = Customer::where('status', 0)->where('approved', 1)->where('created_by', Auth::user()->id)->count();
+        $todaysCustomerInactiveCount = Customer::where('status', 0)->where('approved', 1)->where('created_by', Auth::user()->id)->whereDate('created_at', Carbon::today())->count();
+        $customerRequestCount = Customer::where('status', 1)->where('created_by', Auth::user()->id)->count();
+        $todaysCustomerRequestCount = Customer::where('status', 1)->where('created_by', Auth::user()->id)->whereDate('created_at', Carbon::today())->count();
         $totalPendingWalletCount = WalletTransaction::where('status' , 0)->count();
+        $todaysPendingWalletCount = WalletTransaction::where('status' , 0)->whereDate('created_at', Carbon::today())->count();
         $totalCompletedWalletCount = WalletTransaction::where('status' , 1)->count();
+        $todaysCompletedWalletCount = WalletTransaction::where('status' , 1)->whereDate('created_at', Carbon::today())->count();
         $totalProcessingWalletCount = WalletTransaction::where('status' , 2)->count();
+        $todaysProcessingWalletCount = WalletTransaction::where('status' , 2)->whereDate('created_at', Carbon::today())->count();
 
 
-        return view('backend.index', compact('agentCount', 'inChargeCount', 'customerActiveCount', 'customerInactiveCount', 'customerRequestCount' , 'totalPendingWalletCount', 'totalCompletedWalletCount', 'totalProcessingWalletCount'));
+        return view('backend.index', compact('agentCount', 'todaysAgentCount', 'inChargeCount','todaysInChargeCount', 'customerActiveCount', 'todaysCustomerActiveCount', 'customerInactiveCount', 'todaysCustomerInactiveCount', 'customerRequestCount', 'todaysCustomerRequestCount', 'totalPendingWalletCount', 'todaysPendingWalletCount', 'totalCompletedWalletCount', 'todaysCompletedWalletCount', 'totalProcessingWalletCount', 'todaysProcessingWalletCount'));
     }
 
 

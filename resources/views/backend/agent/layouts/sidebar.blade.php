@@ -1,3 +1,4 @@
+
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo Header -->
@@ -51,7 +52,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('agent.customers.index') }}">
-                                    <span class="su </span>
+                                    <span class="sub-item">Customer List </span>
                                 </a>
                             </li>
                         </ul>

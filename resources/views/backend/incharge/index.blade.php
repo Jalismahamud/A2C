@@ -22,8 +22,8 @@
             {{-- Dashboard Header --}}
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
-                    <h3 class="fw-bold mb-3">Dashboard</h3>
-                    <h6 class="op-7 mb-2">Free Bootstrap 5 Incharge Dashboard</h6>
+                    <h3 class="fw-bold mb-3">Incharge Dashboard</h3>
+                    {{-- <h6 class="op-7 mb-2">Free Bootstrap 5 Incharge Dashboard</h6> --}}
                 </div>
                 <div class="ms-md-auto py-2 py-md-0">
                     <a href="{{ route('incharge.customers.index') }}" class="btn btn-label-info btn-round me-2">Manage</a>
@@ -38,10 +38,40 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
+                                    <div class="icon-big text-center icon-secondary bubble-shadow-small">
+                                       <i class="fas fa-users-cog"></i>
+                                    </div>
+                                </div>
+
+
+                                <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Agents</p>
+                                        <h4 class="card-title">
+                                            {{ $totalAgent }} /
+                                            <span style="font-size: 0.8rem; color: #007bff;">
+                                                {{ $todaysAgent }} Today's Agent
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="card card-stats card-round">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-icon">
                                     <div class="icon-big text-center icon-primary bubble-shadow-small">
                                         <i class="fas fa-users"></i>
                                     </div>
                                 </div>
+
+
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Customers</p>

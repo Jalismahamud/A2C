@@ -4,6 +4,15 @@
 @section('content')
     <div class="container">
         <div class="page-inner">
+
+             {{-- Dashboard Header --}}
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                <div>
+                    <h3 class="fw-bold mb-3">Admin Dashboard</h3>
+                    {{-- <h6 class="op-7 mb-2">Free Bootstrap 5 Incharge Dashboard</h6> --}}
+                </div>
+
+            </div>
             <div class="row">
                 <div class="col-sm-6 col-md-3">
                     <div class="card card-stats card-round">
@@ -17,7 +26,12 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Agent</p>
-                                        <h4 class="card-title">{{ $agentCount ?? '' }}</h4>
+                                        <h4 class="card-title">{{ $agentCount ?? '' }} /
+                                            <span style="font-size: 0.8rem; color: #007bff;">
+                                                {{ $todaysAgentCount }} Today's Agent
+                                            </span>
+                                        </h4>
+
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +50,12 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">InCharge</p>
-                                        <h4 class="card-title">{{ $inChargeCount ?? '' }}</h4>
+                                        <h4 class="card-title">{{ $inChargeCount ?? '' }} /
+                                             <span style="font-size: 0.8rem; color: #007bff;">
+                                                {{ $todaysInChargeCount }} Today's InCharge
+                                            </span>
+                                        </h4>
+
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +74,11 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Active Customer</p>
-                                        <h4 class="card-title">{{ $customerActiveCount ?? '' }}</h4>
+                                        <h4 class="card-title">{{ $customerActiveCount ?? '' }} /
+                                             <span style="font-size: 0.8rem; color: #007bff;">
+                                                {{ $todaysCustomerActiveCount }} Today's Active Customer
+                                            </span>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +97,11 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Inactive Customer</p>
-                                        <h4 class="card-title">{{ $customerInactiveCount ?? '' }}</h4>
+                                        <h4 class="card-title">{{ $customerInactiveCount ?? '' }} /
+                                             <span style="font-size: 0.8rem; color: #007bff;">
+                                                {{ $todaysCustomerInactiveCount }} Today's Inactive Customer
+                                            </span>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +120,11 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Requested Customer</p>
-                                        <h4 class="card-title">{{ $customerRequestCount ?? '' }}</h4>
+                                        <h4 class="card-title">{{ $customerRequestCount ?? '' }} /
+                                             <span style="font-size: 0.8rem; color: #007bff;">
+                                                {{ $todaysCustomerRequestCount }} Today's Requested Customer
+                                            </span>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +145,11 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Total Pending Wallet Request</p>
-                                        <h4 class="card-title">{{ $totalPendingWalletCount ?? '' }}</h4>
+                                        <h4 class="card-title">{{ $totalPendingWalletCount ?? '' }} /
+                                             <span style="font-size: 0.8rem; color: #007bff;">
+                                                {{ $todaysPendingWalletCount }} Today's Pending Wallet
+                                            </span>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +170,11 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Total Processing Wallet</p>
-                                        <h4 class="card-title">{{ $totalProcessingWalletCount ?? '' }}</h4>
+                                        <h4 class="card-title">{{ $totalProcessingWalletCount ?? '' }} /
+                                             <span style="font-size: 0.8rem; color: #007bff;">
+                                                {{ $todaysProcessingWalletCount }} Today's Processing Wallet
+                                            </span>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +195,11 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Total Completed Wallet</p>
-                                        <h4 class="card-title">{{ $totalCompletedWalletCount ?? '' }}</h4>
+                                        <h4 class="card-title">{{ $totalCompletedWalletCount ?? '' }} /
+                                             <span style="font-size: 0.8rem; color: #007bff;">
+                                                {{ $todaysCompletedWalletCount }} Today's Completed Wallet
+                                            </span>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>

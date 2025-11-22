@@ -1,3 +1,4 @@
+
 @extends('backend.agent.layouts.master')
 @section('title', 'Agent Dashboard')
 @section('content')
@@ -22,8 +23,8 @@
             {{-- Dashboard Header --}}
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
-                    <h3 class="fw-bold mb-3">Dashboard</h3>
-                    <h6 class="op-7 mb-2">Free Bootstrap 5 Agent Dashboard</h6>
+                    <h3 class="fw-bold mb-3">Agent Dashboard</h3>
+                    {{-- <h6 class="op-7 mb-2">Free Bootstrap 5 Agent Dashboard</h6> --}}
                 </div>
                 <div class="ms-md-auto py-2 py-md-0">
                     <a href="{{ route('agent.customers.index') }}" class="btn btn-label-info btn-round me-2">Manage</a>

@@ -1,3 +1,4 @@
+
 @if (Session::has('success'))
     <script>
         toastr.options = {
